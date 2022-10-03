@@ -38,7 +38,7 @@ let objeto = {
 
 boton.addEventListener("click", function () {
   containerAudio.innerHTML = " ";
-  let wordLetters = textToTranslate.value.split("");
+  let wordLetters = textToTranslate.value.toLowerCase().split("");
   let arrayAudios = [];
   let translatedArray = wordLetters.map(function (element) {
     return `<p>${objeto[element]}</p>`;
@@ -49,7 +49,6 @@ boton.addEventListener("click", function () {
     var sonido = document.createElement("AUDIO");
     if (element === " ") {
       sonido.setAttribute("src", "./audio/" + 0 + "_morse_code.ogg");
-      continue;
     } else {
       sonido.setAttribute("src", "./audio/" + element + "_morse_code.ogg");
     }
@@ -59,6 +58,7 @@ boton.addEventListener("click", function () {
   }
   console.log(arrayAudios);
   translatedText.innerHTML = translatedArray.join(" ");
+  translatedText.classList.add("borders");
 
   btnAudio.addEventListener("click", function () {
     for (let i = 0; i < arrayAudios.length; i++) {
