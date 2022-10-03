@@ -4,12 +4,14 @@ let boton = document.querySelector("#button-translate");
 let translatedText = document.querySelector("#translated");
 let containerAudio = document.querySelector("#container-audio");
 let btnAudio = document.querySelector("#boton-audio");
+let messageLetters = document.querySelector("#message-letters");
 
 let objeto = {
   a: "· −",
   b: "− · · ·",
   c: "− · − · ",
   d: "− · ·",
+  e: "· ",
   f: "· · − · ",
   g: "− − · ",
   h: "· · · · ",
@@ -39,14 +41,15 @@ boton.addEventListener("click", function () {
   let wordLetters = textToTranslate.value.split("");
   let arrayAudios = [];
   let translatedArray = wordLetters.map(function (element) {
-    return `<div> ${objeto[element]}  </div>`;
+    return `<p>${objeto[element]}</p>`;
   });
 
   for (element of wordLetters) {
-    console.log(element + "ahi");
+    console.log(element + " element");
     var sonido = document.createElement("AUDIO");
     if (element === " ") {
       sonido.setAttribute("src", "./audio/" + 0 + "_morse_code.ogg");
+      continue;
     } else {
       sonido.setAttribute("src", "./audio/" + element + "_morse_code.ogg");
     }
@@ -61,7 +64,13 @@ boton.addEventListener("click", function () {
     for (let i = 0; i < arrayAudios.length; i++) {
       setTimeout(function timer() {
         arrayAudios[i].play();
-      }, i * 1450);
+      }, i * 1750);
+    }
+    for (let i = 0; i < wordLetters.length; i++) {
+      setTimeout(function timer() {
+        console.log("imprimeindo ahi " + translatedArray[i]);
+        messageLetters.innerHTML = translatedArray[i];
+      }, i * 1750);
     }
   });
 });
